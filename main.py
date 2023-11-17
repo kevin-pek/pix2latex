@@ -33,13 +33,13 @@ class OCRMenuBarApp(rumps.App):
         # Get the first item from the pasteboard
         pasteboard_item = pasteboard.pasteboardItems()[0] if pasteboard.pasteboardItems() else None
         if not pasteboard_item:
-            print("Error: No item in the pasteboard")
+            # print("Error: No item in the pasteboard")
             return None
 
         # Get the data for the first available type from the pasteboard item
         data = pasteboard_item.dataForType_(NSPasteboardTypePNG) # pasteboard_item.types()[0])
         if not data:
-            print("Error: No image data found in the pasteboard")
+            # print("Error: No image data found in the pasteboard")
             return None
 
         if not self.use_latex_ocr.state:
@@ -52,7 +52,7 @@ class OCRMenuBarApp(rumps.App):
     def toggle(self, sender):
         """Toggle sender state."""
         sender.state = not sender.state
-        print("Set {} to {}".format(sender.title, sender.state))
+        # print("Set {} to {}".format(sender.title, sender.state))
         self.save_config()
 
     def load_config(self):
@@ -85,9 +85,7 @@ class OCRMenuBarApp(rumps.App):
         keycode = Quartz.CGEventGetIntegerValueField(event, Quartz.kCGKeyboardEventKeycode)
         desired_keycode = 19 # NSString.characterWithString_("2").characterAtIndex_(0)
         desired_flags = kCGEventFlagMaskCommand | kCGEventFlagMaskShift
-        print(keycode)
         if keycode == desired_keycode and (flags & desired_flags) == desired_flags:
-            print("Command + Shift + 2 hotkey pressed!")
             self.run_ocr(None)
 
     def register_hotkey(self):
@@ -113,8 +111,8 @@ class OCRMenuBarApp(rumps.App):
     def check_accessibility_permissions():
         options = {Cocoa.kAXTrustedCheckOptionPrompt: True}
         trusted = Cocoa.AXIsProcessTrustedWithOptions(options)
-        if not trusted:
-            print("The app does not have accessibility permissions. Please grant permissions in System Preferences.")
+        # if not trusted:
+        #     print("The app does not have accessibility permissions. Please grant permissions in System Preferences.")
         return trusted
 
 if __name__ == "__main__":

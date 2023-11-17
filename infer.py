@@ -19,5 +19,4 @@ def run_latex_ocr(image_data):
     with open(tmpfilepath, "rb") as f:
         data = f.read()
     result, elapse = model(data)
-    print(result, elapse)
     return result

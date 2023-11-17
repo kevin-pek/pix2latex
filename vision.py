@@ -11,7 +11,7 @@ def run_vision_ocr(image_data):
     error = None
     success = handler.performRequests_error_([request], error)
     if not success:
-        print(f"Failed to perform OCR: {error}")
+        # print(f"Failed to perform OCR: {error}")
         return
 
     # Get the recognized text from the request results
@@ -19,5 +19,4 @@ def run_vision_ocr(image_data):
     for result in request.results():
         for textObservation in result.topCandidates_(1):
             recognized_text.append(textObservation.string())
-    print('\n'.join(recognized_text))
     return '\n'.join(recognized_text)
